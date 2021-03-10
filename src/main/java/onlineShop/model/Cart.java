@@ -67,4 +67,3 @@ public class Cart implements Serializable {
     }
 
 }
-

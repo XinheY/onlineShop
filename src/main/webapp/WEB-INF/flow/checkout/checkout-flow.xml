@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
 						  http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-    <var name="order" class="onlineShop.entity.SalesOrder" />
+    <var name="order" class="onlineShop.model.SalesOrder" />
     
     <action-state id="addCartToOrder">
         <evaluate expression="cartDao.validate(requestParameters.cartId)" result="order.cart" />
@@ -22,21 +22,16 @@
     </view-state>
 
      <view-state id="orderConfirmation" view = "orderConfirmation.jsp"> 
-         <transition on="orderConfirmed" to="saveOrder" /> 
+         <transition on="orderConfirmed" to="processOrder" /> 
          <transition on="backToCollectShippingDetail" to="collectShippingDetail" /> 
      </view-state> 
 
-    <action-state id="clearCart">
+    <action-state id="processOrder">
         <evaluate expression="cartItemDao.removeAllCartItems(order.cart)" />
         <transition to="thankCustomer" />
     </action-state>
 
-	<action-state id="saveOrder">
-    	<evaluate expression="salesOrderService.addSalesOrder(order)" />
-    	<transition to="clearCart" />
-    </action-state>
-    
-    
+
     <view-state id="thankCustomer" model="order">
         <transition to="endState" />
     </view-state>

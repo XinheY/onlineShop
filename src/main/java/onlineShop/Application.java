@@ -23,8 +23,8 @@ public class Application {
         session.beginTransaction();
 
         Customer customer = new Customer();
-        customer.setFirstName("Adam");
-        customer.setLastName("Lambert");
+        customer.setFirstName("adam");
+        customer.setLastName("lambert");
 
         CartItem cartItem1 = new CartItem();
         cartItem1.setQuantity(1);
